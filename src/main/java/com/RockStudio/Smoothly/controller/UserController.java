@@ -1,7 +1,6 @@
 package com.RockStudio.Smoothly.controller;
 
 import com.RockStudio.Smoothly.model.User;
-import com.RockStudio.Smoothly.repository.UserRepository;
 import com.RockStudio.Smoothly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -23,8 +23,8 @@ public class UserController {
     }
 
     @RequestMapping("/get")
-    public  User getUser(@RequestParam String name){
-        return userService.getByName(name);
+    public Optional<User> getUser(@RequestParam String id){
+        return userService.getById(id);
     }
 
     @RequestMapping("/getAll")
@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @RequestMapping("/update")
-    public  String update(@RequestParam String name,@RequestParam String password,@RequestParam String email){
-        User u = userService.update(name,email,password);
+    public  String update(@RequestParam String id,@RequestParam String name,@RequestParam String password,@RequestParam String email){
+        User u = userService.update(id,name,email,password);
         return  u.toString();
     }
 
