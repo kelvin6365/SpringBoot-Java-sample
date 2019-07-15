@@ -24,6 +24,46 @@ public class User {
         this.password = password;
     }
 
+    public boolean validate() {
+        if (this.name == null) {
+            return false;
+        }
+        if (this.password == null) {
+            return false;
+        }
+        if (this.email == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public String errorField() {
+        String error="";
+        if(this.name == null||this.name.length() == 0||this.password == null||this.password.length() == 0||this.email == null||this.email.length() == 0){
+            if (this.name == null||this.name.length()==0) {
+                if(this.name.length()==0)
+                {error= error+ "name value ";}
+                else
+                {error= error+"name ";}
+            }
+            if (this.password == null||this.password.length()==0) {
+                if(this.password.length()==0)
+                {error= error+ "password value ";}
+                else
+                { error= error+ "password ";}
+            }
+            if (this.email == null||this.email.length()==0) {
+                if(this.email.length()==0)
+                {error= error+ "emaill value ";}
+                else
+                {error= error+ "emaill ";}
+            }
+            return error;
+        }
+
+        return "";
+    }
+
     public String getId() {
         return id;
     }
