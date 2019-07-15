@@ -1,7 +1,14 @@
 package com.RockStudio.Smoothly.model;
 
+import io.leangen.graphql.annotations.GraphQLQuery;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.Entity;
+
 
 @Document
 public class User {
@@ -25,6 +32,7 @@ public class User {
         this.id = id;
     }
 
+    @GraphQLQuery(name = "name", description = "A person's name")
     public String getName() {
         return name;
     }

@@ -2,6 +2,8 @@ package com.RockStudio.Smoothly.service;
 
 import com.RockStudio.Smoothly.model.User;
 import com.RockStudio.Smoothly.repository.UserRepository;
+import io.leangen.graphql.annotations.GraphQLArgument;
+import io.leangen.graphql.annotations.GraphQLQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getById(String id){
+    @GraphQLQuery(name = "user")
+    public Optional<User> getById(@GraphQLArgument(name = "id") String id){
         return userRepository.findById(id);
     }
 
