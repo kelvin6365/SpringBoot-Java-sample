@@ -2,9 +2,11 @@ package com.RockStudio.Smoothly.service;
 
 import com.RockStudio.Smoothly.model.Address;
 import com.RockStudio.Smoothly.repository.AddressRepository;
+import io.leangen.graphql.execution.relay.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -21,4 +23,5 @@ public class AddressService {
     public List<Address> getAll() {
         return addressRepository.findAll();
     }
+
 }
