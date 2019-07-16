@@ -1,5 +1,6 @@
 package com.RockStudio.Smoothly.controller;
 
+import com.RockStudio.Smoothly.query.AddressQuery;
 import com.RockStudio.Smoothly.query.UserQuery;
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
@@ -26,12 +27,12 @@ public class GraphQLController {
     private final GraphQL graphQL;
 
     @Autowired
-    public GraphQLController(UserQuery userQuery) {
+    public GraphQLController(UserQuery userQuery, AddressQuery addressQuery) {
 
         //Schema generated from query classes
         GraphQLSchema schema = new GraphQLSchemaGenerator()
                 .withBasePackages("io.leangen.spqr.samples.demo")
-                .withOperationsFromSingletons(userQuery)
+                .withOperationsFromSingletons(userQuery,addressQuery)
                 .generate();
         graphQL = GraphQL.newGraphQL(schema).build();
 
