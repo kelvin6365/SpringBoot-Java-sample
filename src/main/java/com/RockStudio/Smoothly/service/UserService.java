@@ -2,11 +2,7 @@ package com.RockStudio.Smoothly.service;
 
 import com.RockStudio.Smoothly.model.User;
 import com.RockStudio.Smoothly.repository.UserRepository;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import graphql.GraphQLException;
-import io.leangen.graphql.annotations.GraphQLArgument;
-import io.leangen.graphql.annotations.GraphQLQuery;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
