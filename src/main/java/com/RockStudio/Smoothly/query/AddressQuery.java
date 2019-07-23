@@ -33,7 +33,7 @@ public class AddressQuery {
         System.out.println(a);
         return a;
     }
-
+/*
     public static class ExtendedPage<N> implements Page<N> {
 
         private final List<Edge<N>> edges;
@@ -60,7 +60,7 @@ public class AddressQuery {
             return totalCount;
         }
     }
-
+*/
     public static class ExtendedConnection<E extends Edge> implements Connection<E> {
 
         private final List<E> edges;
@@ -98,7 +98,7 @@ public class AddressQuery {
     }
 
 
-    @GraphQLQuery(name = "allAdress")
+    @GraphQLQuery(name = "allAddress")
     public ExtendedConnection<ExtendedEdge<Address>> getExtended(@GraphQLArgument(name = "first") int first, @GraphQLArgument(name = "after") String after) {
         List<Address> books = addressService.getAll().stream().skip( Integer.parseInt(after)*first).limit(first).collect(Collectors.toList());
         long count = addressService.getAll().size();
