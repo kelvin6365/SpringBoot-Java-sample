@@ -28,9 +28,9 @@ public class UserQuery {
      */
     @GraphQLMutation(name = "createUser")
     public User createUser(
-            @GraphQLArgument(name = "email")  @Valid String email ,
-            @GraphQLArgument(name = "name")   @Valid String name,
-            @GraphQLArgument(name = "password")   @Valid String password
+            @GraphQLNonNull @GraphQLArgument(name = "email")  @Valid String email ,
+            @GraphQLNonNull @GraphQLArgument(name = "name")   @Valid String name,
+            @GraphQLNonNull @GraphQLArgument(name = "password")   @Valid String password
     ){
         User u = userService.create(name,email,password);
         System.out.println(u);

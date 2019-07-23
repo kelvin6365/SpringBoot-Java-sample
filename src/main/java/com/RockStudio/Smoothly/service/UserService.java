@@ -17,18 +17,21 @@ public class UserService {
     //create
     public User create(String name,String email, String password){
         User user = new User(name,email,password);
-        if(user.validate()&&name.length()!=0&&email.length()!=0&&password.length()!=0){
-            userRepository.save(user);
-            return  user;
-        }
-        else
-        {
-            try {
-                String errorFeild = user.errorField();
-                throw new Exception("User "+errorFeild+"missing!");
+            try
+            {
+
+                if(user.validate()&&name.length()!=0&&email.length()!=0&&password.length()!=0){
+                    userRepository.save(user);
+                    return  user;
+                }
+                else
+                {
+                    String errorFeild = user.errorField();
+                    throw new Exception("User "+errorFeild+"missing!");
+                }
             } catch (Exception e) {
                 throw new GraphQLException(e.getMessage());
-            }
+
         }
 
     }

@@ -1,13 +1,15 @@
 package com.RockStudio.Smoothly.controller;
 
+import com.RockStudio.Smoothly.model.Address;
 import com.RockStudio.Smoothly.query.AddressQuery;
 import com.RockStudio.Smoothly.query.UserQuery;
 import graphql.ExecutionInput;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
+import graphql.relay.Relay;
+import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLSchema;
 import io.leangen.graphql.GraphQLSchemaGenerator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.Map;
 
 @RestController
@@ -32,10 +35,12 @@ public class GraphQLController {
         //Schema generated from query classes
         GraphQLSchema schema = new GraphQLSchemaGenerator()
                 .withBasePackages("io.leangen.spqr.samples.demo")
-                .withOperationsFromSingletons(userQuery,addressQuery)
+                .withAdditionalTypes(Collections.singleton(Relay.pageInfoType))
+                .withOperationsFromSingletons(userQuery, addressQuery)
                 .generate();
+        GraphQLFieldDefinition totalCount = schema.getObjectType("AddressConnection")
+                .getFieldDefinition("totalCount");
         graphQL = GraphQL.newGraphQL(schema).build();
-
         LOGGER.info("Generated GraphQL schema using SPQR");
     }
 
