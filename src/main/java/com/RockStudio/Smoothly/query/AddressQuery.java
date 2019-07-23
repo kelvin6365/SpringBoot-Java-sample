@@ -2,7 +2,6 @@ package com.RockStudio.Smoothly.query;
 
 import com.RockStudio.Smoothly.model.Address;
 import com.RockStudio.Smoothly.service.AddressService;
-import com.mongodb.client.FindIterable;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLNonNull;
@@ -10,12 +9,8 @@ import io.leangen.graphql.annotations.GraphQLQuery;
 import io.leangen.graphql.execution.relay.Page;
 import io.leangen.graphql.execution.relay.generic.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-import javax.swing.text.Document;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,9 +35,11 @@ public class AddressQuery {
     ){
         //final Optional<User> searchResult = userService.getById(id);
         int offset = Integer.parseInt(after);
-        System.out.println( addressService.getAll().size());
-        List<Address> addresses = addressService.getAll().stream().skip( Integer.parseInt(after)).limit(first).collect(Collectors.toList());
+        System.out.println( addressService.getAll().size()+" "+Integer.parseInt(after));
+        List<Address> addresses = addressService.getAll().stream().skip( Integer.parseInt(after)*first).limit(first).collect(Collectors.toList());
         System.out.println( addresses);
-        return PageFactory.createOffsetBasedPage(addresses, addresses.size(), offset);
+        return PageFactory.createOffsetBasedPage(addresses, addressService.getAll().size(), offset*first);
     }
+
+
 }
